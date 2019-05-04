@@ -55,6 +55,13 @@ def match_speed_with_nearby(boids, speed_match_rate, speed_nbh):
                         speed_match_rate/num_boids)
     return boids
     
+def apply_velocity(boids):
+    xs,ys,xvs,yvs=boids
+    for i in range(num_boids):
+        xs[i]=xs[i]+xvs[i]
+        ys[i]=ys[i]+yvs[i]
+    return boids
+    
 def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
         to_middle_rate=0.01, speed_match_rate=0.125):
     xs,ys,xvs,yvs=boids
@@ -65,9 +72,7 @@ def update_boids(boids, fly_nbh=100, speed_nbh=10000,
     # Try to match speed with nearby boids
     boids = match_speed_with_nearby(boids, speed_match_rate, speed_nbh)
     # Move according to velocities
-    for i in range(num_boids):
-        xs[i]=xs[i]+xvs[i]
-        ys[i]=ys[i]+yvs[i]
+    boids = apply_velocity(boids)
 
 figure=plt.figure()
 axes=plt.axes(xlim=plt_limits, ylim=plt_limits)
