@@ -7,18 +7,18 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 import random
 
-sample_size = 50
+num_boids = 50
 boids_xlims = (-450, 50.0)
 boids_ylims = (300, 600.0)
 boids_x_velocity_lims = (0,10.0)
 boids_y_velocity_lims = (-20.0,20.0)
 
-boids_x=[random.uniform(*boids_xlims) for x in range(sample_size)]
-boids_y=[random.uniform(*boids_ylims) for x in range(sample_size)]
+boids_x=[random.uniform(*boids_xlims) for x in range(num_boids)]
+boids_y=[random.uniform(*boids_ylims) for x in range(num_boids)]
 boid_x_velocities=[
-        random.uniform(*boids_x_velocity_lims) for x in range(sample_size)]
+        random.uniform(*boids_x_velocity_lims) for x in range(num_boids)]
 boid_y_velocities=[
-        random.uniform(*boids_y_velocity_lims) for x in range(sample_size)]
+        random.uniform(*boids_y_velocity_lims) for x in range(num_boids)]
 boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def update_boids(boids):
