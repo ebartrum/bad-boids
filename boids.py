@@ -47,7 +47,6 @@ def update_boids(boids):
 		xs[i]=xs[i]+xvs[i]
 		ys[i]=ys[i]+yvs[i]
 
-
 figure=plt.figure()
 plt_limits = (-500,1500)
 axes=plt.axes(xlim=plt_limits, ylim=plt_limits)
@@ -56,7 +55,6 @@ scatter=axes.scatter(boids[0],boids[1])
 def animate(frame):
    update_boids(boids)
    scatter.set_offsets(list(zip(boids[0],boids[1])))
-
 
 anim = animation.FuncAnimation(figure, animate,
                                frames=50, interval=50)
