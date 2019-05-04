@@ -8,11 +8,17 @@ from matplotlib import animation
 import random
 
 sample_size = 50
+boids_xlims = (-450, 50.0)
+boids_ylims = (300, 600.0)
+boids_x_velocity_lims = (0,10.0)
+boids_y_velocity_lims = (-20.0,20.0)
 
-boids_x=[random.uniform(-450,50.0) for x in range(sample_size)]
-boids_y=[random.uniform(300.0,600.0) for x in range(sample_size)]
-boid_x_velocities=[random.uniform(0,10.0) for x in range(sample_size)]
-boid_y_velocities=[random.uniform(-20.0,20.0) for x in range(sample_size)]
+boids_x=[random.uniform(*boids_xlims) for x in range(sample_size)]
+boids_y=[random.uniform(*boids_ylims) for x in range(sample_size)]
+boid_x_velocities=[
+        random.uniform(*boids_x_velocity_lims) for x in range(sample_size)]
+boid_y_velocities=[
+        random.uniform(*boids_y_velocity_lims) for x in range(sample_size)]
 boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def update_boids(boids):
