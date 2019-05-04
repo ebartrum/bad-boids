@@ -29,15 +29,17 @@ def update_boids(boids):
 			xvs[i]=xvs[i]+(xs[j]-xs[i])*0.01/len(xs)
 			yvs[i]=yvs[i]+(ys[j]-ys[i])*0.01/len(xs)
 	# Fly away from nearby boids
+        fly_nbh = 100
 	for i in range(len(xs)):
 		for j in range(len(xs)):
-			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < 100:
+			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
 				xvs[i]=xvs[i]+(xs[i]-xs[j])
 				yvs[i]=yvs[i]+(ys[i]-ys[j])
 	# Try to match speed with nearby boids
+        speed_nbh = 10000
 	for i in range(len(xs)):
 		for j in range(len(xs)):
-			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < 10000:
+			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < speed_nbh:
 				xvs[i]=xvs[i]+(xvs[j]-xvs[i])*0.125/len(xs)
 				yvs[i]=yvs[i]+(yvs[j]-yvs[i])*0.125/len(xs)
 	# Move according to velocities
@@ -54,8 +56,10 @@ def animate(frame):
    update_boids(boids)
    scatter.set_offsets(list(zip(boids[0],boids[1])))
 
-anim = animation.FuncAnimation(figure, animate,
-                               frames=50, interval=50)
+animation_frames = 50
+animation_interval = 50
+anim = animation.FuncAnimation(figure, animate, frames=animation_frames,
+        interval=animation_interval)
 
 if __name__ == "__main__":
     plt.show()
