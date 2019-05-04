@@ -7,7 +7,6 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 import random
 
-# Deliberately terrible code for teaching purposes
 sample_size = 50
 
 boids_x=[random.uniform(-450,50.0) for x in range(sample_size)]
