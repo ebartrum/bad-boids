@@ -6,6 +6,7 @@ for use as an exercise on refactoring.
 from matplotlib import pyplot as plt
 from matplotlib import animation
 import random
+from itertools import product
 
 num_boids = 50
 fly_nbh=100
@@ -29,8 +30,7 @@ boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def fly_towards_middle(boids):
     xs,ys,xvs,yvs=boids
-    for i in range(num_boids):
-        for j in range(num_boids):
+    for i,j in product(range(num_boids),range(num_boids)):
             xvs[i]=xvs[i]+(xs[j]-xs[i])*to_middle_rate/num_boids
             yvs[i]=yvs[i]+(ys[j]-ys[i])*to_middle_rate/num_boids
     return boids
