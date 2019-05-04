@@ -29,30 +29,30 @@ boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
 def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
         to_middle_rate=0.01, speed_match_rate=0.125):
-	xs,ys,xvs,yvs=boids
-	# Fly towards the middle
-	for i in range(len(xs)):
-		for j in range(len(xs)):
-			xvs[i]=xvs[i]+(xs[j]-xs[i])*to_middle_rate/num_boids
-			yvs[i]=yvs[i]+(ys[j]-ys[i])*to_middle_rate/num_boids
-	# Fly away from nearby boids
-	for i in range(len(xs)):
-		for j in range(len(xs)):
-			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
-				xvs[i]=xvs[i]+(xs[i]-xs[j])
-				yvs[i]=yvs[i]+(ys[i]-ys[j])
-	# Try to match speed with nearby boids
-	for i in range(len(xs)):
-		for j in range(len(xs)):
-			if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < speed_nbh:
-				xvs[i]=(xvs[i]+(xvs[j]-xvs[i]) *
-                                        speed_match_rate/num_boids)
-				yvs[i]=(yvs[i]+(yvs[j]-yvs[i]) *
-                                        speed_match_rate/num_boids)
-	# Move according to velocities
-	for i in range(len(xs)):
-		xs[i]=xs[i]+xvs[i]
-		ys[i]=ys[i]+yvs[i]
+    xs,ys,xvs,yvs=boids
+    # Fly towards the middle
+    for i in range(len(xs)):
+        for j in range(len(xs)):
+            xvs[i]=xvs[i]+(xs[j]-xs[i])*to_middle_rate/num_boids
+            yvs[i]=yvs[i]+(ys[j]-ys[i])*to_middle_rate/num_boids
+    # Fly away from nearby boids
+    for i in range(len(xs)):
+        for j in range(len(xs)):
+            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
+                xvs[i]=xvs[i]+(xs[i]-xs[j])
+                yvs[i]=yvs[i]+(ys[i]-ys[j])
+    # Try to match speed with nearby boids
+    for i in range(len(xs)):
+        for j in range(len(xs)):
+            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < speed_nbh:
+                xvs[i]=(xvs[i]+(xvs[j]-xvs[i]) *
+                        speed_match_rate/num_boids)
+                yvs[i]=(yvs[i]+(yvs[j]-yvs[i]) *
+                        speed_match_rate/num_boids)
+    # Move according to velocities
+    for i in range(len(xs)):
+        xs[i]=xs[i]+xvs[i]
+        ys[i]=ys[i]+yvs[i]
 
 figure=plt.figure()
 axes=plt.axes(xlim=plt_limits, ylim=plt_limits)
