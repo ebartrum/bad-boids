@@ -64,7 +64,6 @@ def apply_velocity(boids):
     
 def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
         to_middle_rate=0.01, speed_match_rate=0.125):
-    xs,ys,xvs,yvs=boids
     # Fly towards the middle
     boids = fly_towards_middle(boids)
     # Fly away from nearby boids
