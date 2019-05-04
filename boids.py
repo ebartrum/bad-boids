@@ -35,17 +35,22 @@ def fly_towards_middle(boids):
             yvs[i]=yvs[i]+(ys[j]-ys[i])*to_middle_rate/num_boids
     return boids
     
+def fly_away_from_nearby(boids):
+    xs,ys,xvs,yvs=boids
+    for i in range(num_boids):
+        for j in range(num_boids):
+            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
+                xvs[i]=xvs[i]+(xs[i]-xs[j])
+                yvs[i]=yvs[i]+(ys[i]-ys[j])
+    return boids
+    
 def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
         to_middle_rate=0.01, speed_match_rate=0.125):
     xs,ys,xvs,yvs=boids
     # Fly towards the middle
     boids = fly_towards_middle(boids)
     # Fly away from nearby boids
-    for i in range(num_boids):
-        for j in range(num_boids):
-            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
-                xvs[i]=xvs[i]+(xs[i]-xs[j])
-                yvs[i]=yvs[i]+(ys[i]-ys[j])
+    boids = fly_away_from_nearby(boids)
     # Try to match speed with nearby boids
     for i in range(num_boids):
         for j in range(num_boids):
