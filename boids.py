@@ -48,7 +48,7 @@ scatter=axes.scatter(boids[0],boids[1])
 
 def animate(frame):
    update_boids(boids)
-   scatter.set_offsets(zip(boids[0],boids[1]))
+   scatter.set_offsets(list(zip(boids[0],boids[1])))
 
 
 anim = animation.FuncAnimation(figure, animate,
