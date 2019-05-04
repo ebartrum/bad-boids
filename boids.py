@@ -37,22 +37,20 @@ def fly_towards_middle(boids):
     
 def fly_away_from_nearby(boids):
     xs,ys,xvs,yvs=boids
-    for i in range(num_boids):
-        for j in range(num_boids):
-            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
-                xvs[i]=xvs[i]+(xs[i]-xs[j])
-                yvs[i]=yvs[i]+(ys[i]-ys[j])
+    for i,j in product(range(num_boids),range(num_boids)):
+        if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < fly_nbh:
+            xvs[i]=xvs[i]+(xs[i]-xs[j])
+            yvs[i]=yvs[i]+(ys[i]-ys[j])
     return boids
 
 def match_speed_with_nearby(boids, speed_match_rate, speed_nbh):
     xs,ys,xvs,yvs=boids
-    for i in range(num_boids):
-        for j in range(num_boids):
-            if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < speed_nbh:
-                xvs[i]=(xvs[i]+(xvs[j]-xvs[i]) *
-                        speed_match_rate/num_boids)
-                yvs[i]=(yvs[i]+(yvs[j]-yvs[i]) *
-                        speed_match_rate/num_boids)
+    for i,j in product(range(num_boids),range(num_boids)):
+        if (xs[j]-xs[i])**2 + (ys[j]-ys[i])**2 < speed_nbh:
+            xvs[i]=(xvs[i]+(xvs[j]-xvs[i]) *
+                    speed_match_rate/num_boids)
+            yvs[i]=(yvs[i]+(yvs[j]-yvs[i]) *
+                    speed_match_rate/num_boids)
     return boids
     
 def apply_velocity(boids):
