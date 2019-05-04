@@ -27,14 +27,19 @@ boid_y_velocities=[
         random.uniform(*boids_y_velocity_lims) for x in range(num_boids)]
 boids=(boids_x,boids_y,boid_x_velocities,boid_y_velocities)
 
-def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
-        to_middle_rate=0.01, speed_match_rate=0.125):
+def fly_towards_middle(boids):
     xs,ys,xvs,yvs=boids
-    # Fly towards the middle
     for i in range(num_boids):
         for j in range(num_boids):
             xvs[i]=xvs[i]+(xs[j]-xs[i])*to_middle_rate/num_boids
             yvs[i]=yvs[i]+(ys[j]-ys[i])*to_middle_rate/num_boids
+    return boids
+    
+def update_boids(boids, fly_nbh=100, speed_nbh=10000, 
+        to_middle_rate=0.01, speed_match_rate=0.125):
+    xs,ys,xvs,yvs=boids
+    # Fly towards the middle
+    boids = fly_towards_middle(boids)
     # Fly away from nearby boids
     for i in range(num_boids):
         for j in range(num_boids):
